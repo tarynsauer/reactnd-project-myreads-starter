@@ -19,6 +19,16 @@ class BookShelves extends Component {
     )
   }
 
+  moveShelf = (oldBook, newShelf) => {
+    var newBook = oldBook;
+    var oldShelf = oldBook.shelf;
+    newBook.shelf = newShelf;
+    this.setState(prevState => ({
+      [oldShelf]: prevState[oldShelf].filter((book) => book.id !== oldBook.id),
+      [newShelf]: [...prevState[newShelf], newBook],
+    }))
+  }
+
   render() {
     return (
       <div className="list-books">
@@ -26,9 +36,9 @@ class BookShelves extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <BookShelf sectionTitle='Currently Reading' books={this.state.currentlyReading} />
-          <BookShelf sectionTitle='Want to Read' books={this.state.wantToRead} />
-          <BookShelf sectionTitle='Read' books={this.state.read} />
+          <BookShelf sectionTitle='Currently Reading' books={this.state.currentlyReading} moveShelf={this.moveShelf} />
+          <BookShelf sectionTitle='Want to Read' books={this.state.wantToRead} moveShelf={this.moveShelf} />
+          <BookShelf sectionTitle='Read' books={this.state.read} moveShelf={this.moveShelf} />
         </div>
       </div>
     )

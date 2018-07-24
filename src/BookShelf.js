@@ -6,7 +6,7 @@ class BookShelf extends Component {
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.sectionTitle}</h2>
-        <BookList books={this.props.books} />
+        <BookList books={this.props.books} moveShelf={this.props.moveShelf} />
       </div>
     )
   }
