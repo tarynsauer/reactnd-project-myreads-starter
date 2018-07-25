@@ -6,25 +6,40 @@ import * as BooksAPI from './BooksAPI'
 class SearchForm extends Component {
   state = {
     query: '',
-    books: [],
+    searchResults: [],
   }
 
   handleQueryInput = (e) => {
     this.setState({query: e.target.value})
   }
 
-  updateSearchResults = (books) => {
-    if (Array.isArray(books)) {
-      this.setState({books: books})
+  setBookShelf = (results) => {
+    results.map((result) => {
+      var books = this.props.books.filter(book => book.id === result.id)
+      if (books.length > 0) {
+        result.shelf = books[0].shelf
+        return result
+      } else {
+        result.shelf = 'none'
+        return result
+      }
+    })
+    return results
+  }
+
+  updateSearchResults = (results) => {
+    if (Array.isArray(results)) {
+      var books = this.setBookShelf(results)
+      this.setState({searchResults: books})
     } else {
-      this.setState({books: []})
+      this.setState({searchResults: []})
     }
   }
 
   handleSubmit = (e) => {
     if (e.key === 'Enter') {
-      BooksAPI.search(this.state.query).then((books) =>
-        this.updateSearchResults(books)
+      BooksAPI.search(this.state.query).then((results) =>
+        this.updateSearchResults(results)
       ).catch(() =>
         this.setState({books: []})
       )
@@ -43,7 +58,7 @@ class SearchForm extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.map((book) => {
+            {this.state.searchResults.map((book) => {
               return (<li key={book.id}>
                 <Book book={book} moveShelf={this.props.moveShelf} />
               </li>)
