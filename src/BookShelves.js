@@ -2,11 +2,25 @@ import React, { Component } from 'react'
 import BookShelf from './BookShelf'
 
 class BookShelves extends Component {
+  booksByShelf = (shelf) => {
+    return this.props.books.filter((book) => book.shelf === shelf)
+  }
 
   render() {
-    const currentlyReading = this.props.books.filter((book) => book.shelf === 'currentlyReading');
-    const wantToRead = this.props.books.filter((book) => book.shelf === 'wantToRead')
-    const read = this.props.books.filter((book) => book.shelf === 'read')
+    const shelves = [
+      {
+        sectionTitle: 'Currently Reading',
+        books: this.booksByShelf('currentlyReading'),
+      },
+      {
+        sectionTitle: 'Want to Read',
+        books: this.booksByShelf('wantToRead'),
+      },
+      {
+        sectionTitle: 'Read',
+        books: this.booksByShelf('read'),
+      },
+    ]
 
     return (
       <div className="list-books">
@@ -14,9 +28,9 @@ class BookShelves extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <BookShelf sectionTitle='Currently Reading' books={currentlyReading} moveShelf={this.props.moveShelf} />
-          <BookShelf sectionTitle='Want to Read' books={wantToRead} moveShelf={this.props.moveShelf} />
-          <BookShelf sectionTitle='Read' books={read} moveShelf={this.props.moveShelf} />
+          {shelves.map((shelf) => {
+            return <BookShelf key={shelf.sectionTitle} sectionTitle={shelf.sectionTitle} books={shelf.books} moveShelf={this.props.moveShelf} />
+          })}
         </div>
       </div>
     )

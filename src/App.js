@@ -6,7 +6,9 @@ import { Route, Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends Component {
-  state = { books: [] }
+  state = {
+    books: [],
+  }
 
   moveShelf = (movedBook, newShelf) => {
     this.setState(prevState => ({
