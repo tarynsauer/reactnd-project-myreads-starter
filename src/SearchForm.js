@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import SearchResults from './SearchResults'
 import * as BooksAPI from './BooksAPI'
 
@@ -60,6 +61,11 @@ class SearchForm extends Component {
       </div>
     )
   }
+}
+
+SearchForm.propTypes = {
+  books: PropTypes.array.isRequired,
+  addToShelf: PropTypes.func.isRequired,
 }
 
 export default SearchForm

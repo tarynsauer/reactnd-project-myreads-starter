@@ -1,5 +1,6 @@
 import React from 'react'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 const SearchResults = ({ searchResults, updateShelf }) => (
   <div className="search-books-results">
@@ -12,5 +13,10 @@ const SearchResults = ({ searchResults, updateShelf }) => (
     </ol>
   </div>
 )
+
+SearchResults.propTypes = {
+  searchResults: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+}
 
 export default SearchResults
