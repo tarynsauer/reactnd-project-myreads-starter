@@ -45,7 +45,7 @@ class SearchForm extends Component {
           <ol className="books-grid">
             {this.state.books.map((book) => {
               return (<li key={book.id}>
-                <Book book={book} />
+                <Book book={book} moveShelf={this.props.moveShelf} />
               </li>)
             })}
           </ol>
