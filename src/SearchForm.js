@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Book from './Book'
+import SearchResults from './SearchResults'
 import * as BooksAPI from './BooksAPI'
 
 class SearchForm extends Component {
@@ -56,15 +56,7 @@ class SearchForm extends Component {
               onKeyPress={this.handleSubmit} onChange={this.handleQueryInput} />
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid">
-            {this.state.searchResults.map((book) => {
-              return (<li key={book.id}>
-                <Book book={book} updateShelf={this.props.addToShelf} />
-              </li>)
-            })}
-          </ol>
-        </div>
+        <SearchResults searchResults={this.state.searchResults} updateShelf={this.props.addToShelf} />
       </div>
     )
   }
