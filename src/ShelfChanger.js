@@ -6,7 +6,7 @@ class ShelfChanger extends Component {
     var newShelf = e.target.value
     var book = this.props.book
     BooksAPI.update(book, newShelf).then(() =>
-      this.props.moveShelf(book, newShelf)
+      this.props.updateShelf(book, newShelf)
     )
   }
 

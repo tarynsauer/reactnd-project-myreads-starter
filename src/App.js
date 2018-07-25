@@ -12,7 +12,15 @@ class BooksApp extends Component {
     this.setState(prevState => ({
       books: prevState.books.map((book) =>
         movedBook.id === book.id ? Object.assign({}, book, { shelf: newShelf }) : book
-      )}))
+      )})
+    )
+  }
+
+  addToShelf = (book, shelf) => {
+    book.shelf = shelf
+    this.setState(prevState => ({
+      books: [...prevState.books, book]
+    }))
   }
 
   componentDidMount() {
@@ -33,7 +41,7 @@ class BooksApp extends Component {
           </div>
         )} />
         <Route path='/search' render={() => (
-          <SearchForm books={this.state.books} moveShelf={this.moveShelf} />
+          <SearchForm books={this.state.books} addToShelf={this.addToShelf} />
         )} />
       </div>
     )

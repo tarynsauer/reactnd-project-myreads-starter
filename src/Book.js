@@ -10,7 +10,7 @@ class Book extends Component {
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${cover}")` }}></div>
-          <ShelfChanger book={this.props.book} currentlySelected={shelf} moveShelf={this.props.moveShelf} />
+          <ShelfChanger book={this.props.book} currentlySelected={shelf} updateShelf={this.props.updateShelf} />
         </div>
         <div className="book-title">{title}</div>
         <div className="book-authors">{authors}</div>

@@ -29,8 +29,8 @@ class SearchForm extends Component {
 
   updateSearchResults = (results) => {
     if (Array.isArray(results)) {
-      var books = this.setBookShelf(results)
-      this.setState({searchResults: books})
+      var resultsWithShelves = this.setBookShelf(results)
+      this.setState({searchResults: resultsWithShelves})
     } else {
       this.setState({searchResults: []})
     }
@@ -60,7 +60,7 @@ class SearchForm extends Component {
           <ol className="books-grid">
             {this.state.searchResults.map((book) => {
               return (<li key={book.id}>
-                <Book book={book} moveShelf={this.props.moveShelf} />
+                <Book book={book} updateShelf={this.props.addToShelf} />
               </li>)
             })}
           </ol>
