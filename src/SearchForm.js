@@ -16,7 +16,7 @@ class SearchForm extends Component {
 
   setBookShelf = (results) => {
     results.map((result) => {
-      var books = this.props.books.filter(book => book.id === result.id)
+      const books = this.props.books.filter(book => book.id === result.id)
       if (books.length > 0) {
         result.shelf = books[0].shelf
         return result
@@ -30,20 +30,23 @@ class SearchForm extends Component {
 
   updateSearchResults = (results) => {
     if (Array.isArray(results)) {
-      var resultsWithShelves = this.setBookShelf(results)
-      this.setState({searchResults: resultsWithShelves})
+      const formattedResults = this.setBookShelf(results).filter(book => book.imageLinks !== undefined)
+      this.setState({searchResults: formattedResults})
     } else {
       this.setState({searchResults: []})
     }
   }
 
   handleSubmit = (e) => {
-    if (e.key === 'Enter') {
-      BooksAPI.search(this.state.query).then((results) =>
+    const queryText = this.state.query
+    if (queryText.length > 0) {
+      BooksAPI.search(queryText).then((results) =>
         this.updateSearchResults(results)
       ).catch(() =>
         this.setState({books: []})
       )
+    } else {
+      this.setState({books: []})
     }
   }
 
