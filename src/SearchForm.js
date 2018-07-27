@@ -37,16 +37,16 @@ class SearchForm extends Component {
     }
   }
 
-  handleSubmit = (e) => {
+  handleKeyUp = (e) => {
     const queryText = this.state.query
     if (queryText.length > 0) {
       BooksAPI.search(queryText).then((results) =>
         this.updateSearchResults(results)
       ).catch(() =>
-        this.setState({books: []})
+        this.setState({searchResults: []})
       )
     } else {
-      this.setState({books: []})
+      this.setState({searchResults: []})
     }
   }
 
@@ -57,7 +57,7 @@ class SearchForm extends Component {
           <Link to='/' className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             <input type="text" placeholder="Search by title or author" value={this.state.query}
-              onKeyPress={this.handleSubmit} onChange={this.handleQueryInput} />
+              onKeyUp={this.handleKeyUp} onChange={this.handleQueryInput} />
           </div>
         </div>
         <SearchResults searchResults={this.state.searchResults} updateShelf={this.props.updateShelf} />
