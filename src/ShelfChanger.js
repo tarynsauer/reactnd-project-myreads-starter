@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 
 class ShelfChanger extends Component {
   handleChange = (e) => {
-    var newShelf = e.target.value
-    var book = this.props.book
+    const newShelf = e.target.value
+    const book = this.props.book
     BooksAPI.update(book, newShelf).then(() =>
       this.props.updateShelf(book, newShelf)
     )
