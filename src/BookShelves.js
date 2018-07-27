@@ -30,7 +30,7 @@ class BookShelves extends Component {
         </div>
         <div className="list-books-content">
           {shelves.map((shelf) => {
-            return <BookShelf key={shelf.sectionTitle} sectionTitle={shelf.sectionTitle} books={shelf.books} moveShelf={this.props.moveShelf} />
+            return <BookShelf key={shelf.sectionTitle} sectionTitle={shelf.sectionTitle} books={shelf.books} updateShelf={this.props.updateShelf} />
           })}
         </div>
       </div>
@@ -40,7 +40,7 @@ class BookShelves extends Component {
 
 BookShelves.propTypes = {
   books: PropTypes.array.isRequired,
-  moveShelf: PropTypes.func.isRequired,
+  updateShelf: PropTypes.func.isRequired,
 }
 
 export default BookShelves;

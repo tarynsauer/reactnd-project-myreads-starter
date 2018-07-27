@@ -60,7 +60,7 @@ class SearchForm extends Component {
               onKeyPress={this.handleSubmit} onChange={this.handleQueryInput} />
           </div>
         </div>
-        <SearchResults searchResults={this.state.searchResults} updateShelf={this.props.addToShelf} />
+        <SearchResults searchResults={this.state.searchResults} updateShelf={this.props.updateShelf} />
       </div>
     )
   }
@@ -68,7 +68,7 @@ class SearchForm extends Component {
 
 SearchForm.propTypes = {
   books: PropTypes.array.isRequired,
-  addToShelf: PropTypes.func.isRequired,
+  updateShelf: PropTypes.func.isRequired,
 }
 
 export default SearchForm

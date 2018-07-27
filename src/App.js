@@ -25,6 +25,14 @@ class BooksApp extends Component {
     }))
   }
 
+  updateShelf = (book, shelf) => {
+    if (book.shelf === 'none') {
+      this.addToShelf(book, shelf)
+    } else {
+      this.moveShelf(book, shelf)
+    }
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then(books =>
       this.setState({ books: books })
@@ -36,14 +44,14 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path='/' render={() => (
           <div className="search-books">
-            <BookShelves books={this.state.books} moveShelf={this.moveShelf} />
+            <BookShelves books={this.state.books} updateShelf={this.updateShelf} />
             <div className="open-search">
               <Link to='/search'>Add a book</Link>
             </div>
           </div>
         )} />
         <Route path='/search' render={() => (
-          <SearchForm books={this.state.books} addToShelf={this.addToShelf} />
+          <SearchForm books={this.state.books} updateShelf={this.updateShelf} />
         )} />
       </div>
     )

@@ -2,16 +2,16 @@ import React from 'react'
 import BookList from './BookList'
 import PropTypes from 'prop-types'
 
-const BookShelf = ({ books, sectionTitle, moveShelf }) => (
+const BookShelf = ({ books, sectionTitle, updateShelf }) => (
   <div className="bookshelf">
     <h2 className="bookshelf-title">{ sectionTitle }</h2>
-    <BookList books={ books } moveShelf={ moveShelf } />
+    <BookList books={ books } updateShelf={ updateShelf } />
   </div>
 )
 
 BookShelf.propTypes = {
   books: PropTypes.array.isRequired,
-  moveShelf: PropTypes.func.isRequired,
+  updateShelf: PropTypes.func.isRequired,
   sectionTitle: PropTypes.string.isRequired,
 }
 
