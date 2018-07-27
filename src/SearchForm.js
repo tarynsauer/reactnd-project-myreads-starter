@@ -30,8 +30,8 @@ class SearchForm extends Component {
 
   updateSearchResults = (results) => {
     if (Array.isArray(results)) {
-      const formattedResults = this.setBookShelf(results).filter(book => book.imageLinks !== undefined)
-      this.setState({searchResults: formattedResults})
+      const cleanResults = this.setBookShelf(results).filter(book => book.imageLinks !== undefined)
+      this.setState({searchResults: cleanResults})
     } else {
       this.setState({searchResults: []})
     }
