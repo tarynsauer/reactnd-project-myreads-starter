@@ -6,6 +6,7 @@ import * as BooksAPI from './BooksAPI'
 
 class SearchForm extends Component {
   state = {
+    errorMessage: '',
     query: '',
     searchResults: [],
   }
@@ -30,10 +31,10 @@ class SearchForm extends Component {
 
   updateSearchResults = (results) => {
     if (Array.isArray(results)) {
-      const cleanResults = this.setBookShelf(results).filter(book => book.imageLinks !== undefined)
-      this.setState({searchResults: cleanResults})
+      const cleanResults = this.setBookShelf(results)
+      this.setState({searchResults: cleanResults, errorMessage: ''})
     } else {
-      this.setState({searchResults: []})
+      this.setState({searchResults: [], errorMessage: ''})
     }
   }
 
@@ -43,10 +44,10 @@ class SearchForm extends Component {
       BooksAPI.search(queryText).then((results) =>
         this.updateSearchResults(results)
       ).catch(() =>
-        this.setState({searchResults: []})
+        this.setState({errorMessage: 'Books not found.'})
       )
     } else {
-      this.setState({searchResults: []})
+      this.setState({searchResults: [], errorMessage: ''})
     }
   }
 
@@ -60,7 +61,7 @@ class SearchForm extends Component {
               onKeyUp={this.handleKeyUp} onChange={this.handleQueryInput} />
           </div>
         </div>
-        <SearchResults searchResults={this.state.searchResults} updateShelf={this.props.updateShelf} />
+        <SearchResults errorMessage={this.state.errorMessage} searchResults={this.state.searchResults} updateShelf={this.props.updateShelf} />
       </div>
     )
   }
